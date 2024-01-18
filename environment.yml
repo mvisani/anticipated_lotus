@@ -1,0 +1,11 @@
+name: grape
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11.4
+  - pip
+  - pip:
+    - grape
+    - obonet
+    - sparqlwrapper
+    - jupyterlab
