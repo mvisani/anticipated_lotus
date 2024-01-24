@@ -4,7 +4,7 @@ import sys
 from SPARQLWrapper import SPARQLWrapper, JSON
 import time
 from requests import ConnectTimeout
-from functools import cache
+from cache_decorator import Cache
 
 
 def get_results(endpoint_url, query):
@@ -123,7 +123,7 @@ def convert_to_edges(df: pd.DataFrame):
     )
 
 
-@cache
+@Cache()
 def taxonomy_in_edges(species: str):
     """
     Retrieves the taxonomy information for a single species and converts it into edges.
