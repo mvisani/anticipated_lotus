@@ -32,7 +32,9 @@ def run(
 
     results = []
     for external_holdout_number in trange(
-        number_of_external_holdouts, desc="External holdouts"
+        number_of_external_holdouts,
+        desc="External holdouts",
+        leave=False,
     ):
         tmp = deflate(
             external_holdout(
