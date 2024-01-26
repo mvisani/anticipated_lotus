@@ -26,6 +26,7 @@ def external_holdout(
     combination: str,
     normalize: bool,
     model_class: Type[AbstractModel],
+    max_evals: int,
 ):
     # split the graph containg only "in_taxon" edges into training and testing
     # this will be tjhe positive training and testing
@@ -84,7 +85,7 @@ def external_holdout(
                     normalize,
                     params,
                     model_class,
-                )
+                )["performance"]
             )
 
         # we do minus the mean because hyperopt only has a fmin function that minimizes the space
@@ -95,7 +96,9 @@ def external_holdout(
 
     ## hyperopt optimization
     optimal_params = hyperopt_optimization(
-        objective=objective, space=model_class.search_space()
+        objective=objective,
+        space=model_class.search_space(),
+        max_evals=max_evals,
     )
 
     return {

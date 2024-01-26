@@ -9,7 +9,10 @@ from .experiment import experiments
 
 @Cache(
     cache_dir="experiments/n_hops_{number_of_hops}/combination_{combination}/normalize_{normalize}/ext_{external_holdout_number}/int_{internal_holdout_number}/{_hash}",
-    cache_path="{cache_dir}/performance.json",
+    cache_path={
+        "params": "{cache_dir}/params.json",
+        "performance": "{cache_dir}/performance.json",
+    },
 )
 def internal_holdout(
     graph_without_in_taxon: Graph,
@@ -63,9 +66,12 @@ def internal_holdout(
         normalize=normalize,
     )
 
-    return experiments(
-        features=internal_features,
-        params=params,
-        model_class=model_class,
-        random_state=internal_holdout_number,
-    )
+    return {
+        "params": params,
+        "performance": experiments(
+            features=internal_features,
+            params=params,
+            model_class=model_class,
+            random_state=internal_holdout_number,
+        ),
+    }

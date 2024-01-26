@@ -1,7 +1,7 @@
 import grape
 from grape import Graph
 from src import run
-from src.models import ModelDummy
+from src.models import DecisionTree
 
 
 def test_pipeline():
@@ -25,7 +25,8 @@ def test_pipeline():
         number_of_hops=1,
         combination="addition",
         normalize=False,
-        model_class=ModelDummy,
+        model_class=DecisionTree,
+        max_evals=1000,
     )
 
-    assert result.shape == (1, 21)
+    assert result.shape == (1, 26)

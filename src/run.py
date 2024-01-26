@@ -21,6 +21,7 @@ def run(
     combination: str,
     normalize: bool,
     model_class: Type[AbstractModel],
+    max_evals: int,
 ):
     graph_with_only_in_taxon = graph.filter_from_names(
         edge_type_names_to_keep=["biolink:in_taxon"],
@@ -43,6 +44,7 @@ def run(
                 combination,
                 normalize,
                 model_class,
+                max_evals=max_evals,
             )
         )
         tmp["external_holdout_number"] = external_holdout_number
@@ -50,6 +52,7 @@ def run(
         tmp["combination"] = combination
         tmp["normalize"] = normalize
         tmp["model_class"] = model_class.__name__
+        tmp["max_evals"] = max_evals
 
         results.append(tmp)
 
