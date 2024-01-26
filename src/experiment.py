@@ -10,6 +10,18 @@ def experiments(
     model_class: Type[AbstractModel],
     random_state: int,
 ) -> Dict[str, Dict[str, float]]:
+    """
+    Run experiments using the given features, model parameters, and random state.
+
+    Args:
+        features (Dict[str, np.ndarray]): A dictionary containing the features for training and testing.
+        params: The parameters for the model.
+        model_class (Type[AbstractModel]): The class of the model to be used.
+        random_state (int): The random state for shuffling the training data.
+
+    Returns:
+        Dict[str, Dict[str, float]]: A dictionary containing the evaluation scores for the training and testing sets.
+    """
     # create the labels based on the features
     label_train_pos = np.ones(features["train_positive"].shape[0])
     label_train_neg = np.zeros(features["train_negative"].shape[0])

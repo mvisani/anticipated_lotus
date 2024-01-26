@@ -1,9 +1,12 @@
 import numpy as np
 from typing import Optional
+from dict_hash import Hashable
 
 
-class AbstractModel:
-    def fit(self, X: np.ndarray, y: np.ndarray, weight: Optional[np.ndarray]) -> None:
+class AbstractModel(Hashable):
+    def fit(
+        self, X: np.ndarray, y: np.ndarray, weight: Optional[np.ndarray] = None
+    ) -> None:
         raise NotImplementedError(
             "This method needs to be implemented, please implement it."
         )
@@ -14,6 +17,7 @@ class AbstractModel:
             "This method needs to be implemented, please implement it."
         )
 
+    @staticmethod
     def from_params(params) -> "Self":
         """Returns a new model with provided parameters."""
         raise NotImplementedError(
@@ -28,6 +32,13 @@ class AbstractModel:
 
     def load_model(path):
         """Loads model from specified path"""
+        raise NotImplementedError(
+            "This method needs to be implemented, please implement it."
+        )
+
+    @staticmethod
+    def search_space():
+        """Returns the search space for the model."""
         raise NotImplementedError(
             "This method needs to be implemented, please implement it."
         )

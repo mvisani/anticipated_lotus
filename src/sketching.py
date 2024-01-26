@@ -18,7 +18,9 @@ def hyper_sketching(
         hops=number_of_hops,
         normalize=normalize,
         graph=graph,
-    ).fit()
+    )
+
+    sketching_features.fit()
 
     # sketching for positive training edges
     pos_sources = graph_with_only_in_taxon_edges.get_directed_source_node_ids()

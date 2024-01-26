@@ -5,20 +5,26 @@ from typing import Type, Dict
 from .models.abstract_model import AbstractModel
 from .sketching import hyper_sketching_outer
 from .experiment import experiments
+import numpy as np
+from .internal_holdouts import internal_holdout
+from .bayesian_optimization import hyperopt_optimization
 
 
 @Cache(
     cache_dir="experiments/n_hops_{number_of_hops}/combination_{combination}/normalize_{normalize}/ext_{external_holdout_number}/{_hash}",
-    cache_path="{cache_dir}/performance.json",
+    cache_path={
+        "optimal_params": "{cache_dir}/optimal_params.json",
+        "performance": "{cache_dir}/performance.json",
+    },
 )
 def external_holdout(
     graph_without_in_taxon: Graph,
     graph_with_only_in_taxon: Graph,
     number_of_hops: int,
     external_holdout_number: int,
+    number_of_internal_holdouts: int,
     combination: str,
     normalize: bool,
-    params: dict,
     model_class: Type[AbstractModel],
 ):
     # split the graph containg only "in_taxon" edges into training and testing
@@ -61,22 +67,43 @@ def external_holdout(
         normalize=normalize,
     )
 
-    ## TODO bayesian optimization
-    optimal_params, history = bayesian_optimization(
-        graph_without_in_taxon,
-        only_in_taxon_train,
-        number_of_hops,
-        internal_holdout_number,
-        combination,
-        normalize,
-        params=params,
-        model_class=model_class,
-        random_state=external_holdout_number,
+    def objective(params):
+        performance = []
+        for inner_holdout_number in range(number_of_internal_holdouts):
+            # needs to integrate the internal holdout function
+            # the internal holdout function returns a dictionary with the performance of the model
+            # we want the to return the mcc of the m
+            performance.append(
+                internal_holdout(
+                    graph_without_in_taxon,
+                    only_in_taxon_train,
+                    number_of_hops,
+                    external_holdout_number,
+                    inner_holdout_number,
+                    combination,
+                    normalize,
+                    params,
+                    model_class,
+                )
+            )
+
+        # we do minus the mean because hyperopt only has a fmin function that minimizes the space
+        return -np.mean([p["test"]["mcc"] for p in performance])
+
+    # then the bayesian optimization needs to take as input the objective function and the hyperparameter space
+    # and return the optimal hyperparameters
+
+    ## hyperopt optimization
+    optimal_params = hyperopt_optimization(
+        objective=objective, space=model_class.search_space()
     )
 
-    return experiments(
-        features=external_features,
-        params=optimal_params,
-        model_class=model_class,
-        random_state=external_holdout_number,
-    )
+    return {
+        "optimal_params": optimal_params,
+        "performance": experiments(
+            features=external_features,
+            params=optimal_params,
+            model_class=model_class,
+            random_state=external_holdout_number,
+        ),
+    }
