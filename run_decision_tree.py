@@ -8,12 +8,12 @@ from src.models import DecisionTree
 def main():
     graph = Graph.from_csv(
         name="lotus_with_ncbi",
-        node_path="./data/lotus_with_ncbi_nodes.csv",
+        node_path="./data/lotus_with_ncbi_clean_nodes.csv",
         node_list_separator="\t",
         node_list_header=True,
         nodes_column_number=0,
         node_list_node_types_column_number=1,
-        edge_path="./data/lotus_with_ncbi_edges.csv",
+        edge_path="./data/lotus_with_ncbi_clean_edges.csv",
         edge_list_separator="\t",
         edge_list_header=True,
         sources_column_number=0,
@@ -22,8 +22,6 @@ def main():
         # directed=True,
         directed=False,
     )
-    graph = graph.remove_singleton_nodes()
-    graph = graph.remove_components(top_k_components=1)
     run(
         graph=graph,
         number_of_external_holdouts=10,
