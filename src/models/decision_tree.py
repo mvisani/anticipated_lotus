@@ -36,7 +36,7 @@ class DecisionTree(AbstractModel):
 
     def search_space():
         return {
-            "criterion": hp.choice("criterion", ["gini", "entropy"]),
+            "criterion": hp.choice("criterion", ["gini", "entropy", "log_loss"]),
             "splitter": hp.choice("splitter", ["best", "random"]),
             "max_depth": hp.uniformint("max_depth", 1, 10),
             "min_samples_split": hp.uniform("min_samples_split", 0, 1),
@@ -56,7 +56,7 @@ class DecisionTree(AbstractModel):
         assert isinstance(params["min_samples_split"], float)
         assert isinstance(params["min_samples_leaf"], float)
         assert isinstance(params["max_features"], str)
-        assert params["criterion"] in ["gini", "entropy"]
+        assert params["criterion"] in ["gini", "entropy", "log_loss"]
         assert params["splitter"] in ["best", "random"]
         assert params["max_depth"] >= 1
         assert params["min_samples_split"] >= 0

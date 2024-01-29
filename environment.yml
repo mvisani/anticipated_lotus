@@ -10,3 +10,4 @@ dependencies:
     - sparqlwrapper
     - jupyterlab
     - hyperopt
+    - pytest

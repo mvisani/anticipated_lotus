@@ -16,6 +16,8 @@ def test_pipeline():
         destinations_column_number=1,
         edge_list_edge_types_column_number=2,
         directed=False,
+        load_edge_list_in_parallel=False,
+        load_node_list_in_parallel=False,
     )
 
     result = run(

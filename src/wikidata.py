@@ -123,7 +123,10 @@ def convert_to_edges(df: pd.DataFrame):
     )
 
 
-@Cache()
+@Cache(
+    cache_dir="data/species/all_species/{species}/",
+    cache_path="{cache_dir}/{_hash}.csv.gz",
+)
 def taxonomy_in_edges(species: str):
     """
     Retrieves the taxonomy information for a single species and converts it into edges.
@@ -135,7 +138,8 @@ def taxonomy_in_edges(species: str):
         pd.DataFrame: The edges of the taxonomy graph for the species as a pandas DataFrame.
     """
     taxo = get_taxonomy(species)
-    return convert_to_edges(taxo)
+    out = convert_to_edges(taxo)
+    return pd.DataFrame(out)
 
 
 # def get_taxo_in_edges_all(all_species, n_cpus=4):

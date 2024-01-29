@@ -21,7 +21,10 @@ def main():
         edge_list_edge_types_column_number=2,
         # directed=True,
         directed=False,
+        load_edge_list_in_parallel=False,
+        load_node_list_in_parallel=False,
     )
+    print("The graph hash is: ", graph.hash())
     run(
         graph=graph,
         number_of_external_holdouts=10,
@@ -30,7 +33,7 @@ def main():
         combination="addition",
         normalize=False,
         model_class=DecisionTree,
-        max_evals=2,
+        max_evals=1,
     )
 
 
