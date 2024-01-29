@@ -4,9 +4,9 @@
 First thing to do is to download LOTUS from Zenodo: 
 ```bash
 wget https://zenodo.org/record/7534071/files/230106_frozen_metadata.csv.gz
-mv ./230106_frozen_metadata ./data/molecules/
+mv ./230106_frozen_metadata.csv.gz ./data/molecules/230106_frozen_metadata.csv.gz
 wget http://classyfire.wishartlab.com/system/downloads/1_0/chemont/ChemOnt_2_1.obo.zip
-mv ./ChemOnt_2_1.obo.zip ./data/molecules/
+mv ./ChemOnt_2_1.obo.zip ./data/molecules/ChemOnt_2_1.obo.zip
 # unzip the file
 unzip ./data/molecules/ChemOnt_2_1.obo.zip
 
