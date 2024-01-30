@@ -1,6 +1,6 @@
 from grape import Graph
 from src import run
-from src.models import DecisionTree
+from src.models import RandomForest
 
 
 def main():
@@ -30,7 +30,7 @@ def main():
         number_of_hops=2,
         combination="addition",
         normalize=False,
-        model_class=DecisionTree,
+        model_class=RandomForest,
         max_evals=1,
     )
 

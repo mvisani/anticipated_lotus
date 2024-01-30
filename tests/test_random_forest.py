@@ -1,7 +1,7 @@
 import grape
 from grape import Graph
 from src import run
-from src.models import DecisionTree
+from src.models import RandomForest
 
 
 def test_pipeline():
@@ -27,8 +27,6 @@ def test_pipeline():
         number_of_hops=1,
         combination="addition",
         normalize=False,
-        model_class=DecisionTree,
-        max_evals=1000,
+        model_class=RandomForest,
+        max_evals=20,
     )
-
-    # assert result.shape == (1, 26)
