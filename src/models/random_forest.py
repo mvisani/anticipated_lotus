@@ -11,6 +11,7 @@ class RandomForest(AbstractModel):
         self,
         n_estimators: int,
         criterion: str,
+        max_depth: int,
         min_samples_split: float,
         min_samples_leaf: float,
         max_features,
@@ -20,7 +21,7 @@ class RandomForest(AbstractModel):
         params = dict(
             n_estimators=n_estimators,
             criterion=criterion,
-            max_depth=None,
+            max_depth=max_depth,
             min_samples_split=min_samples_split,
             min_samples_leaf=min_samples_leaf,
             max_features=max_features,
@@ -36,7 +37,10 @@ class RandomForest(AbstractModel):
 
     def search_space():
         return {
-            "n_estimators": hp.choice("n_estimators", [50, 100, 200, 300, 1000]),
+            "n_estimators": hp.choice(
+                "n_estimators", [10, 20, 50, 100, 200, 300, 1000]
+            ),
+            "max_depth": hp.uniformint("max_depth", 1, 20),
             "criterion": hp.choice("criterion", ["gini", "entropy", "log_loss"]),
             "min_samples_split": hp.uniform("min_samples_split", 0, 1),
             "min_samples_leaf": hp.uniform("min_samples_leaf", 0, 1),
@@ -49,6 +53,7 @@ class RandomForest(AbstractModel):
         return RandomForest(
             n_estimators=params["n_estimators"],
             criterion=params["criterion"],
+            max_depth=params["max_depth"],
             min_samples_split=params["min_samples_split"],
             min_samples_leaf=params["min_samples_leaf"],
             max_features=params["max_features"],

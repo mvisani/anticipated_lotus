@@ -10,7 +10,7 @@ def hyperopt_optimization(objective, space, max_evals):
         max_evals=max_evals,  # Number of optimization attempts
         verbose=True,
         show_progressbar=True,
-        early_stop_fn=no_progress_loss(iteration_stop_count=20, percent_increase=0.05),
+        early_stop_fn=no_progress_loss(iteration_stop_count=30, percent_increase=0.05),
     )
     best = space_eval(space, best)
     return best
