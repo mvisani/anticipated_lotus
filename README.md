@@ -8,8 +8,9 @@ TODO
 
 ### Run the analysis
 You may choose which ever model you want from the [`src/models`](https://github.com/mvisani/anticipated_lotus/tree/main/src/models) folder. If you want you can also implement your own model. The available models are : 
-- [DecisionTree](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier.fit) from scikit-learn
-- 
+- [DecisionTree](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier.fit)
+- [RandomForest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
+- [XGBoost](https://xgboost.readthedocs.io/en/latest/python/python_api.html#xgboost.XGBClassifier)
 
 Before running the script, you should change the variable `max_evals` in the `run_decision_tree.py` file to 100 or more.
 
