@@ -12,3 +12,4 @@ dependencies:
     - hyperopt
     - pytest
     - xgboost
+    - lightgbm
