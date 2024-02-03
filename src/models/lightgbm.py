@@ -46,7 +46,7 @@ class LightGBM(AbstractModel):
 
     @staticmethod
     def from_params(params):
-        return Lightgbm(
+        return LightGBM(
             boosting_type=params["boosting_type"],
             num_leaves=params["num_leaves"],
             max_depth=params["max_depth"],
