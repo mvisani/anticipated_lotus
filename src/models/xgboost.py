@@ -13,7 +13,6 @@ class XGBoost(AbstractModel):
         max_depth: int,
         max_leaves: int,
         grow_policy: int,
-        learning_rate: float,
         booster: str,
         tree_method: str,
     ) -> None:
@@ -23,7 +22,6 @@ class XGBoost(AbstractModel):
             max_depth=max_depth,
             max_leaves=max_leaves,
             grow_policy=grow_policy,
-            learning_rate=learning_rate,
             booster=booster,
             tree_method=tree_method,
             n_jobs=-1,
@@ -53,7 +51,6 @@ class XGBoost(AbstractModel):
             max_depth=params["max_depth"],
             max_leaves=params["max_leaves"],
             grow_policy=params["grow_policy"],
-            learning_rate=params["learning_rate"],
             booster=params["booster"],
             tree_method=params["tree_method"],
         )
