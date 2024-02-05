@@ -36,12 +36,9 @@ class XGBoost(AbstractModel):
 
     def search_space():
         return {
-            "n_estimators": hp.choice(
-                "n_estimators", [10, 20, 50, 100, 200, 300, 1000]
-            ),
+            "n_estimators": hp.choice("n_estimators", [10, 20, 50, 100, 200, 300]),
             "max_depth": hp.uniformint("max_depth", 1, 20),
             "max_leaves": hp.uniformint("max_leaves", 0, 50),
-            "learning_rate": hp.uniform("learning_rate", 0, 1),
             "grow_policy": hp.choice("grow_policy", ["depthwise", "lossguide"]),
             "booster": hp.choice("booster", ["gbtree", "gblinear", "dart"]),
             "tree_method": hp.choice(
