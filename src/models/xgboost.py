@@ -4,6 +4,7 @@ import numpy as np
 from typing import Optional
 from xgboost import XGBClassifier
 from dict_hash import sha256
+import compress_pickle
 
 
 class XGBoost(AbstractModel):
@@ -61,7 +62,18 @@ class XGBoost(AbstractModel):
         self.model.fit(X, y, sample_weight=weight)
 
     def predict(self, X: np.ndarray) -> np.ndarray:
-        return self.model.predict_proba(X)[:, 1]
+        return self.model.predict(X)
+
+    def predict_proba(self, X: np.ndarray) -> np.ndarray:
+        return self.model.predict_proba(X)
+
+    # change to "compress_pickle"
+    def dump_model(self, path: str) -> None:
+        compress_pickle.dump(self, path)
+
+    @staticmethod
+    def load_model(path: str):
+        return compress_pickle.load(path)
 
     def consistent_hash(self) -> str:
         return sha256(
