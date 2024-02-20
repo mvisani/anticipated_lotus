@@ -30,7 +30,7 @@ class XGBoost(AbstractModel):
             device="cpu",
         )
         self.model = XGBClassifier(
-            **self.params,
+            **params,
         )
         self.params = params
 

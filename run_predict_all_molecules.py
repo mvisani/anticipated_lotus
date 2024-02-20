@@ -39,7 +39,7 @@ sketching_features = HyperSketchingPy(
 )
 sketching_features.fit()
 
-for species in tqdm(["wd:Q311176", "wd:Q15550965"]):
+for species in tqdm(["wd:Q311176", "wd:Q15550965", "wd:Q21319402"]):
     run_predictions_on_all_molecules_for_one_species(
         species=species,
         graph=graph,

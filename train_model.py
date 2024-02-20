@@ -47,6 +47,7 @@ def main():
     normalize = False
     combination = "addition"
 
+    print("Creating the features...")
     sketching_features = HyperSketchingPy(
         hops=number_of_hops, normalize=normalize, graph=graph
     )
@@ -56,6 +57,7 @@ def main():
     pos_sources = pos.get_directed_source_node_ids()
     pos_destinations = pos.get_directed_destination_node_ids()
 
+    print("Creating the positive features...")
     sk_positive_features = sketching_features.positive(
         sources=pos_sources,
         destinations=pos_destinations,
@@ -63,6 +65,7 @@ def main():
     )
 
     # sketching for training negatives
+    print("Creating the negative features...")
     neg_sources = neg.get_directed_source_node_ids()
     neg_destinations = neg.get_directed_destination_node_ids()
     sk_negative_features = sketching_features.negative(
@@ -99,6 +102,7 @@ def main():
         n_estimators=200,
         tree_method="exact",
     )
+    print("Training the model...")
     model.fit(X_shuffled, label_shuffled)
 
     # And save it :

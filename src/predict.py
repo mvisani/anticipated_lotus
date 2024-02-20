@@ -8,7 +8,7 @@ from .models.abstract_model import AbstractModel
 
 
 @Cache(
-    cache_dir="predictions/{model}/{species}/",
+    cache_dir="predictions/{species}/",
     cache_path="{cache_dir}/{_hash}.csv.gz",
     args_to_ignore=["sketching_features"],
     use_approximated_hash=True,
@@ -47,6 +47,11 @@ def run_predictions_on_all_molecules_for_one_species(
 
     final_df = df[df.proba > 0.75].sort_values("proba", ascending=False)
     return final_df
+
+
+@Cache()
+def run_predictions_on_all_species_for_one_molecule():
+    return 0
 
 
 # apply a function that looks at the species, anf if the molecule id is in the neighborhood of the species,
