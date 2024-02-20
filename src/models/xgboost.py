@@ -30,8 +30,9 @@ class XGBoost(AbstractModel):
             device="cpu",
         )
         self.model = XGBClassifier(
-            **params,
+            **self.params,
         )
+        self.params = params
 
     def search_space():
         return {

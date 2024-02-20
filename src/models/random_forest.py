@@ -34,6 +34,7 @@ class RandomForest(AbstractModel):
         self.model = RandomForestClassifier(
             **params,
         )
+        self.params = params
 
     def search_space():
         return {
