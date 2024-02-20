@@ -3,3 +3,12 @@
 __pycache__/
 graphs/
 experiments/
+
+# remove notebooks since they are no longer needed in repo and they are used only for development
+*.ipynb
+
+# remove wheel files and pickles
+*.whl
+
+# remove pickles as they are not supported in the GitHub
+*.pkl

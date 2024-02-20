@@ -64,7 +64,7 @@ python prepare_data/prepare_merge_ncbi.py
 ```
 
 Once this is done you should have different graph as such : 
-```
+```shell
 .
 ├── full_lotus_edges.csv
 ├── full_lotus_nodes.csv
@@ -95,4 +95,8 @@ Once this is done you should have different graph as such :
 In our case we will use the `lotus_with_ncbi_clean` graph. But all the other graphs are also available in case you want to explore them.
 
 ### Run the analysis
-This is not possible at the moment because the module `ensmallen` from [grape](https://github.com/AnacletoLAB/grape) does not support the HyperSketching yet. Once it will be available, we recommend to first run the `run_decision_tree.py` script with `max_eval=1`. This will first create the sketching of the different holdouts of training and testing. Then you can run the script with `max_eval=100` or more to find the best parameters of the model.
+This is not possible at the moment because the module `ensmallen` from [grape](https://github.com/AnacletoLAB/grape) does not support the HyperSketching yet. Once it will be available, we recommend to first run the `run_model_dummy.py` script with `max_eval=1`. This will first create the sketching of the different holdouts of training and testing. Then you can run the script with `max_eval=100` or more to find the best parameters of the model.
+
+### Train the model
+Once the best parameters are found, you can train the model using the `train_model.py` script. You should manually change the parameters and the model in the script according to the best parameters found.
+

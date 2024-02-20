@@ -68,7 +68,6 @@ class XGBoost(AbstractModel):
     def predict_proba(self, X: np.ndarray) -> np.ndarray:
         return self.model.predict_proba(X)
 
-    # change to "compress_pickle"
     def dump_model(self, path: str) -> None:
         compress_pickle.dump(self, path)
 
